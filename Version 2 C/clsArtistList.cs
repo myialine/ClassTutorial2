@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Version_2_C
 {
     [Serializable()]
-    public class clsArtistList : SortedDictionary<string, clsArtist>
+    public class clsArtistList : SortedList<string, clsArtist>
     {
         private const string _FileName = "gallery.dat";
 
