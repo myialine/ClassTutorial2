@@ -1,6 +1,6 @@
 namespace Version_2_C
 {
-    public partial class frmPhotograph : Version_2_C.frmWork
+    public partial class frmPhotograph : frmWork
     {
         public frmPhotograph()
         {

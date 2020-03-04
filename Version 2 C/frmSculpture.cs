@@ -1,6 +1,6 @@
 namespace Version_2_C
 {
-    public partial class frmSculpture : Version_2_C.frmWork
+    public partial class frmSculpture : frmWork
     {
         public frmSculpture()
         {

@@ -1,6 +1,6 @@
 namespace Version_2_C
 {
-    public partial class frmPainting : Version_2_C.frmWork
+    public partial class frmPainting : frmWork
     {
 
         public frmPainting()

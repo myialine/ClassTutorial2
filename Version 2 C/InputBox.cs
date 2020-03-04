@@ -25,7 +25,6 @@ namespace Version_2_C
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            Close();
         }
 
         public string Answer
