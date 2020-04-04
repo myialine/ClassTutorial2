@@ -1,17 +1,35 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Version_2_C
 {
-    public partial class frmArtist : Form
+    public partial class FrmArtist : Form
     {
-        public frmArtist()
+        public FrmArtist()
         {
             InitializeComponent();
         }
 
         private clsArtist _Artist;
         private clsWorksList _WorksList;
+        private static Dictionary<clsArtist, FrmArtist> _ArtistFormList = new Dictionary<clsArtist, FrmArtist>();
+
+        public static void Run(clsArtist prArtist)
+        {
+            FrmArtist lcArtistForm;
+            if(!_ArtistFormList.TryGetValue(prArtist, out lcArtistForm))
+            {
+                lcArtistForm = new FrmArtist();
+                _ArtistFormList.Add(prArtist, lcArtistForm);
+                lcArtistForm.SetDetails(prArtist);
+            }
+            else
+            {
+                lcArtistForm.Show();
+                lcArtistForm.Activate();
+            }
+        }
 
 
         private void updateDisplay()
@@ -36,9 +54,11 @@ namespace Version_2_C
         public void SetDetails(clsArtist prArtist)
         {
             _Artist = prArtist;
+            txtName.Enabled = string.IsNullOrEmpty(_Artist.Name);
+            frmMain.Instance.updateDisplay();
             updateForm();
             updateDisplay();
-            ShowDialog();
+            Show();
         }
 
         private void updateForm()
@@ -63,6 +83,7 @@ namespace Version_2_C
             if (lcIndex >= 0 && MessageBox.Show("Are you sure?", "Deleting work", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 _WorksList.RemoveAt(lcIndex);
+                frmMain.Instance.updateDisplay();
                 updateDisplay();
             }
         }
@@ -73,6 +94,7 @@ namespace Version_2_C
             if (!string.IsNullOrEmpty(lcReply))
             {
                 _WorksList.AddWork(lcReply[0]);
+                frmMain.Instance.updateDisplay();
                 updateDisplay();
             }
         }
@@ -81,8 +103,23 @@ namespace Version_2_C
         {
             if (isValid() == true)
             {
-                pushData();
-                Close();
+                try
+                {
+                    pushData();
+                    if (txtName.Enabled)
+                    {
+                        _Artist.NewArtist();
+                        MessageBox.Show("Artist Added.");
+                        frmMain.Instance.updateDisplay();
+                        txtName.Enabled = false;
+                    }
+                    Hide();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
         }
 
@@ -105,6 +142,7 @@ namespace Version_2_C
             try
             {
                 _WorksList.EditWork(lstWorks.SelectedIndex);
+                frmMain.Instance.updateDisplay();
                 updateDisplay();
             }
             catch (Exception ex)

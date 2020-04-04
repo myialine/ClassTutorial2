@@ -1,16 +1,23 @@
 namespace Version_2_C
 {
-    public partial class frmPhotograph : frmWork
+    public sealed partial class frmPhotograph : frmWork
     {
-        public frmPhotograph()
+        private frmPhotograph()
         {
             InitializeComponent();
+        }
+
+        public static readonly frmPhotograph Instance = new frmPhotograph();
+
+        public static void Run(ClsPhotograph prPhotograph)
+        {
+            Instance.SetDetails(prPhotograph);
         }
 
         protected override void updateForm()
         {
             base.updateForm();
-            clsPhotograph lcWork = (clsPhotograph)this._Work;
+            ClsPhotograph lcWork = (ClsPhotograph)this._Work;
             txtWidth.Text = lcWork.Width.ToString();
             txtHeight.Text = lcWork.Height.ToString();
             txtType.Text = lcWork.Type;
@@ -19,7 +26,7 @@ namespace Version_2_C
         protected override void pushData()
         {
             base.pushData();
-            clsPhotograph lcWork = (clsPhotograph)_Work;
+            ClsPhotograph lcWork = (ClsPhotograph)_Work;
             lcWork.Width = float.Parse(txtWidth.Text);
             lcWork.Height = float.Parse(txtHeight.Text);
             lcWork.Type = txtType.Text;

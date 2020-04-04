@@ -3,20 +3,18 @@ using System;
 namespace Version_2_C
 {
     [Serializable()]
-    public class clsPhotograph : clsWork
+    public class ClsPhotograph : clsWork
     {
         private float _Width;
         private float _Height;
         private string _Type;
 
-        [NonSerialized()]
-        private frmPhotograph _PhotoDialog;
+        public delegate void LoadPhotographFormDelegate(ClsPhotograph prPhotograph);
+        public static LoadPhotographFormDelegate LoadPhotographForm;
 
         public override void EditDetails()
         {
-            if (_PhotoDialog == null)
-                _PhotoDialog = new frmPhotograph();
-            _PhotoDialog.SetDetails(this);
+            LoadPhotographForm(this);
         }
 
         public Single Width

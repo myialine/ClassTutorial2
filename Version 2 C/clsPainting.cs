@@ -3,21 +3,18 @@ using System;
 namespace Version_2_C
 {
     [Serializable()]
-    public class clsPainting : clsWork
+    public class ClsPainting : clsWork
     {
         private float _Width;
         private float _Height;
         private string _Type;
 
-
-        [NonSerialized()]
-        private static frmPainting _PaintDialog;
+        public delegate void LoadPaintingFormDelegate(ClsPainting prPainting);
+        public static LoadPaintingFormDelegate LoadPaintingForm;
 
         public override void EditDetails()
         {
-            if (_PaintDialog == null)
-                _PaintDialog = new frmPainting();
-            _PaintDialog.SetDetails(this);
+            LoadPaintingForm(this);
         }
 
         public Single Width

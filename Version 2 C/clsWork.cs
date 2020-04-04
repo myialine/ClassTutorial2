@@ -21,9 +21,9 @@ namespace Version_2_C
         {
             switch (char.ToUpper(prChoice))
             {
-                case 'P': return new clsPainting();
-                case 'S': return new clsSculpture();
-                case 'H': return new clsPhotograph();
+                case 'P': return new ClsPainting();
+                case 'S': return new ClsSculpture();
+                case 'H': return new ClsPhotograph();
                 default: return null;
             }
         }

@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace Version_2_C
 {
-    class clsNameComparer : IComparer<clsWork>
+    public sealed partial class ClsNameComparer : IComparer<clsWork>
     {
+        private ClsNameComparer()
+        {
+        }
+
+        public static readonly ClsNameComparer Instance = new ClsNameComparer();
+
         public int Compare(clsWork x, clsWork y)
         {
             string lcNameX = x.Name;

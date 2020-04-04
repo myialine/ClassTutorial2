@@ -3,19 +3,18 @@ using System;
 namespace Version_2_C
 {
     [Serializable()]
-    public class clsSculpture : clsWork
+    public class ClsSculpture : clsWork
     {
         private float _Weight;
         private string _Material;
 
-        [NonSerialized()]
-        private static frmSculpture _SculptureDialog;
+        public delegate void LoadSculptureFormDelegate(ClsSculpture prSculpture);
+        public static LoadSculptureFormDelegate LoadSculpureForm;
+
 
         public override void EditDetails()
         {
-            if (_SculptureDialog == null)
-                _SculptureDialog = new frmSculpture();
-            _SculptureDialog.SetDetails(this);
+            LoadSculpureForm(this);
         }
 
         public Single Weight

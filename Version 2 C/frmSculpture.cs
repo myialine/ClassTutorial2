@@ -1,16 +1,23 @@
 namespace Version_2_C
 {
-    public partial class frmSculpture : frmWork
+    public sealed partial class frmSculpture : frmWork
     {
-        public frmSculpture()
+        private frmSculpture()
         {
             InitializeComponent();
+        }
+
+        public static readonly frmSculpture Instance = new frmSculpture();
+
+        public static void Run(ClsSculpture prSculpture)
+        {
+            Instance.SetDetails(prSculpture);
         }
 
         protected override void updateForm()
         {
             base.updateForm();
-            clsSculpture lcWork = (clsSculpture)this._Work;
+            ClsSculpture lcWork = (ClsSculpture)this._Work;
             txtWeight.Text = lcWork.Weight.ToString();
             txtMaterial.Text = lcWork.Material;
         }
@@ -18,7 +25,7 @@ namespace Version_2_C
         protected override void pushData()
         {
             base.pushData();
-            clsSculpture lcWork = (clsSculpture)_Work;
+            ClsSculpture lcWork = (ClsSculpture)_Work;
             lcWork.Weight = float.Parse(txtWeight.Text);
             lcWork.Material = txtMaterial.Text;
         }
