@@ -65,5 +65,7 @@ namespace Version_2_C
         {
             get { return _WorksList; }
         }
+
+        public ClsArtistList ArtistList { get => _ArtistList; }
     }
 }

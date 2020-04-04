@@ -14,7 +14,7 @@ namespace Version_2_C
         public static frmMain Instance => _Instance;
 
         private ClsArtistList _ArtistList = new ClsArtistList();
-        public delegate void Notify(string prGalleryNAme);
+        public delegate void Notify(string prGalleryName);
         public event Notify GalleryNameChanged;
 
 

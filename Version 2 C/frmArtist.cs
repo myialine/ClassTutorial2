@@ -31,6 +31,12 @@ namespace Version_2_C
             }
         }
 
+        private void updateTitle(string prGalleryName)
+        {
+            if (!string.IsNullOrEmpty(prGalleryName))
+                Text = "Artist details - " + prGalleryName;
+        }
+
 
         private void updateDisplay()
         {
@@ -58,7 +64,10 @@ namespace Version_2_C
             frmMain.Instance.updateDisplay();
             updateForm();
             updateDisplay();
+            frmMain.Instance.GalleryNameChanged += new frmMain.Notify(updateTitle);
+            updateTitle(_Artist.ArtistList.GalleryName);
             Show();
+           
         }
 
         private void updateForm()
